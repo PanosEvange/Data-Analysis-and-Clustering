@@ -23,4 +23,34 @@
 
 # ### Do all the necessary imports for this notebook
 
+# region
+import numpy as np
 import pandas as pd
+
+# visualization
+import seaborn as sns
+import matplotlib.pyplot as plt
+# %matplotlib inline
+# endregion
+
+# ### Read data
+
+# region
+initialDataFrame = pd.read_csv('../data/crime.csv', engine='python')
+
+initialDataFrame # printToBeRemoved
+# endregion
+
+# ### Do some data preparation
+
+# region
+# drop the columns that we don't need
+processedDataFrame = initialDataFrame.drop(['Location'], axis=1)
+
+# replace some NaN values
+processedDataFrame = processedDataFrame.fillna({'SHOOTING':"Ν"})
+
+processedDataFrame['SHOOTING'].unique() # printToBeRemoved
+# endregion
+
+processedDataFrame
