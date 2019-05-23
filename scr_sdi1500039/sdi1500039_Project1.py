@@ -39,7 +39,7 @@ import matplotlib.pyplot as plt
 # region
 initialDataFrame = pd.read_csv('../data/crime.csv', engine='python')
 
-initialDataFrame # printToBeRemoved
+# initialDataFrame # printToBeRemoved
 # endregion
 
 # ## __Do some data preparation__
@@ -54,43 +54,45 @@ processedDataFrame = processedDataFrame.fillna({'SHOOTING':"Ν"})
 processedDataFrame['SHOOTING'].unique()  # printToBeRemoved
 # endregion
 
-processedDataFrame  # printToBeRemoved
-
 # ## __Data Research__
 
 # 1. #### Multitude of crimes by year, by month, by date and by district
 
 # region
 # groupBy year
-yearMultitudeDf = processedDataFrame.groupby(['YEAR']).count()
+# yearMultitudeDf = processedDataFrame.groupby(['YEAR']).count() # to be removed
+yearMultitudeSeries = processedDataFrame.groupby(['YEAR'])['INCIDENT_NUMBER'].count()
 
 # replace month numbers to month names
 monthMultitudeDf = processedDataFrame.copy()
 monthMultitudeDf['MONTH'] = monthMultitudeDf['MONTH'].apply(lambda x: calendar.month_abbr[x])
 
 # groupBy month
-monthMultitudeDf = monthMultitudeDf.groupby(['MONTH']).count()
+monthMultitudeSeries = monthMultitudeDf.groupby(['MONTH'])['INCIDENT_NUMBER'].count()
+# monthMultitudeDf = monthMultitudeDf.groupby(['MONTH']).count() # to be removed
 
 # groupBy day
-dayMultitudeDf = processedDataFrame.groupby(['DAY_OF_WEEK']).count()
+# dayMultitudeDf = processedDataFrame.groupby(['DAY_OF_WEEK']).count() # to be removed
+dayMultitudeSeries = processedDataFrame.groupby(['DAY_OF_WEEK'])['INCIDENT_NUMBER'].count()
 
 # groupBy district
-districtMultitudeDf = processedDataFrame.groupby(['DISTRICT']).count()
+# districtMultitudeDf = processedDataFrame.groupby(['DISTRICT']).count() # to be removed
+districtMultitudeSeries = processedDataFrame.groupby(['DISTRICT'])['INCIDENT_NUMBER'].count()
 
 print("Count by year:")  # printToBeRemoved
-print(yearMultitudeDf['INCIDENT_NUMBER'])  # printToBeRemoved
+print(yearMultitudeSeries)  # printToBeRemoved
 print("--------------")  # printToBeRemoved
 
 print("Count by month:")  # printToBeRemoved
-print(monthMultitudeDf['INCIDENT_NUMBER'])  # printToBeRemoved
+print(monthMultitudeSeries)  # printToBeRemoved
 print("--------------")  # printToBeRemoved
 
 print("Count by day:")  # printToBeRemoved
-print(dayMultitudeDf['INCIDENT_NUMBER'])  # printToBeRemoved
+print(dayMultitudeSeries)  # printToBeRemoved
 print("--------------")  # printToBeRemoved
 
 print("Count by district:")  # printToBeRemoved
-print(districtMultitudeDf['INCIDENT_NUMBER'])  # printToBeRemoved
+print(districtMultitudeSeries)  # printToBeRemoved
 print("--------------")  # printToBeRemoved
 # endregion
 
