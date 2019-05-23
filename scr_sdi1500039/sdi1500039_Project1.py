@@ -124,4 +124,23 @@ print(districtShootings[districtShootings == districtShootings.max()])  # printT
 print("--------------")  # printToBeRemoved
 # endregion
 
+# 3. #### Check if crimes are more during the day than during the night
+
+# region
+# make new column that represents day or night
+dayNightDataFrame = processedDataFrame.copy()
+dayNightDataFrame['DAY_NIGHT'] = np.where(((dayNightDataFrame['HOUR'] >= 7) & (dayNightDataFrame['HOUR'] <= 17)),
+                                          'day', 'night')
+
+dayCrimesCount = (dayNightDataFrame['DAY_NIGHT'] == 'day').sum()
+nightCrimesCount = (dayNightDataFrame['DAY_NIGHT'] == 'night').sum()
+
+print("Count of crimes during day is:")  # printToBeRemoved
+print(dayCrimesCount)  # printToBeRemoved
+
+print("Count of crimes during night is:")  # printToBeRemoved
+print(nightCrimesCount)  # printToBeRemoved
+
+# dayNightDataFrame  # printToBeRemoved
+# endregion
 
