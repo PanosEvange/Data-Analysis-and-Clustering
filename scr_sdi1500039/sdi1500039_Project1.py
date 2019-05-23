@@ -49,50 +49,78 @@ initialDataFrame = pd.read_csv('../data/crime.csv', engine='python')
 processedDataFrame = initialDataFrame.drop(['Location'], axis=1)
 
 # replace some NaN values
-processedDataFrame = processedDataFrame.fillna({'SHOOTING':"Ν"})
+processedDataFrame = processedDataFrame.fillna({'SHOOTING': "N"})
 
 processedDataFrame['SHOOTING'].unique()  # printToBeRemoved
 # endregion
 
 # ## __Data Research__
 
-# 1. #### Multitude of crimes by year, by month, by date and by district
+# 1. #### Count of crimes per year, per month, per date and per district
 
 # region
 # groupBy year
-# yearMultitudeDf = processedDataFrame.groupby(['YEAR']).count() # to be removed
-yearMultitudeSeries = processedDataFrame.groupby(['YEAR'])['INCIDENT_NUMBER'].count()
+# yearCountDf = processedDataFrame.groupby(['YEAR']).count() # to be removed
+yearCountSeries = processedDataFrame.groupby(['YEAR'])['INCIDENT_NUMBER'].count()
 
 # replace month numbers to month names
-monthMultitudeDf = processedDataFrame.copy()
-monthMultitudeDf['MONTH'] = monthMultitudeDf['MONTH'].apply(lambda x: calendar.month_abbr[x])
+monthCountDf = processedDataFrame.copy()
+monthCountDf['MONTH'] = monthCountDf['MONTH'].apply(lambda x: calendar.month_abbr[x])
 
 # groupBy month
-monthMultitudeSeries = monthMultitudeDf.groupby(['MONTH'])['INCIDENT_NUMBER'].count()
-# monthMultitudeDf = monthMultitudeDf.groupby(['MONTH']).count() # to be removed
+monthCountSeries = monthCountDf.groupby(['MONTH'])['INCIDENT_NUMBER'].count()
+# monthCountDf = monthCountDf.groupby(['MONTH']).count() # to be removed
 
 # groupBy day
-# dayMultitudeDf = processedDataFrame.groupby(['DAY_OF_WEEK']).count() # to be removed
-dayMultitudeSeries = processedDataFrame.groupby(['DAY_OF_WEEK'])['INCIDENT_NUMBER'].count()
+# dayCountDf = processedDataFrame.groupby(['DAY_OF_WEEK']).count() # to be removed
+dayCountSeries = processedDataFrame.groupby(['DAY_OF_WEEK'])['INCIDENT_NUMBER'].count()
 
 # groupBy district
-# districtMultitudeDf = processedDataFrame.groupby(['DISTRICT']).count() # to be removed
-districtMultitudeSeries = processedDataFrame.groupby(['DISTRICT'])['INCIDENT_NUMBER'].count()
+# districtCountDf = processedDataFrame.groupby(['DISTRICT']).count() # to be removed
+districtCountSeries = processedDataFrame.groupby(['DISTRICT'])['INCIDENT_NUMBER'].count()
 
 print("Count by year:")  # printToBeRemoved
-print(yearMultitudeSeries)  # printToBeRemoved
+print(yearCountSeries)  # printToBeRemoved
 print("--------------")  # printToBeRemoved
 
 print("Count by month:")  # printToBeRemoved
-print(monthMultitudeSeries)  # printToBeRemoved
+print(monthCountSeries)  # printToBeRemoved
 print("--------------")  # printToBeRemoved
 
 print("Count by day:")  # printToBeRemoved
-print(dayMultitudeSeries)  # printToBeRemoved
+print(dayCountSeries)  # printToBeRemoved
 print("--------------")  # printToBeRemoved
 
 print("Count by district:")  # printToBeRemoved
-print(districtMultitudeSeries)  # printToBeRemoved
+print(districtCountSeries)  # printToBeRemoved
+print("--------------")  # printToBeRemoved
+
+# for distr, count in districtCountSeries.items():
+#     print("District: ", distr, " has ", count, " crimes!")
+# endregion
+
+# 2. #### Find the maximum count of shootings by year and by district
+
+# region
+# replace Y -> 1, N -> 0 so as we can sum the shootings
+shootingDataFrame = processedDataFrame.copy()
+shootingDataFrame['SHOOTING'] = shootingDataFrame['SHOOTING'].map(dict(Y=1, N=0))
+
+# groupBy year
+yearShootings = shootingDataFrame.groupby(['YEAR'])['SHOOTING'].sum()
+
+# groupBy district
+districtShootings = shootingDataFrame.groupby(['DISTRICT'])['SHOOTING'].sum()
+
+print("Shootings by year:")  # printToBeRemoved
+print(yearShootings)  # printToBeRemoved
+print("Max year is:")  # printToBeRemoved
+print(yearShootings[yearShootings == yearShootings.max()])  # printToBeRemoved
+print("--------------")  # printToBeRemoved
+print("Shootings by district:")  # printToBeRemoved
+print(districtShootings)  # printToBeRemoved
+print("Max district is:")  # printToBeRemoved
+print(districtShootings[districtShootings == districtShootings.max()])  # printToBeRemoved
 print("--------------")  # printToBeRemoved
 # endregion
 
