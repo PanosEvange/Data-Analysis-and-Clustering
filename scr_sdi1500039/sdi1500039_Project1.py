@@ -144,3 +144,21 @@ print(nightCrimesCount)  # printToBeRemoved
 # dayNightDataFrame  # printToBeRemoved
 # endregion
 
+# 4. #### Find the most common type of crime that is committed during the day
+
+# region
+# make a dataFrame that is consisted only of crimes that are committed during the day
+onlyDayCrimes = dayNightDataFrame.copy()
+onlyDayCrimes = onlyDayCrimes[(onlyDayCrimes['DAY_NIGHT'] == "day")]
+
+# if we need only the name of the code then we can do the following
+mostCommonOffenseCode = onlyDayCrimes['OFFENSE_CODE_GROUP'].mode()
+
+# if we want to know the count of crimes of this type then
+# groupBy by offense_code
+codeCount = onlyDayCrimes.groupby(['OFFENSE_CODE_GROUP'])['INCIDENT_NUMBER'].count()
+
+print("the most common type of crime that is committed during the day is ", mostCommonOffenseCode)
+print(codeCount[codeCount == codeCount.max()])
+# onlyDayCrimes  # printToBeRemoved
+# endregion
