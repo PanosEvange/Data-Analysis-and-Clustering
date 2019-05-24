@@ -31,8 +31,10 @@ import calendar
 # visualization
 import seaborn as sns
 import matplotlib.pyplot as plt
-# %matplotlib inline
+
 # endregion
+
+# %matplotlib inline
 
 # ## __Read data__
 
@@ -168,9 +170,25 @@ print(codeCount[codeCount == codeCount.max()])
 # Let's try a scatter plot with seaborn first
 
 # region
-locationDf = processedDataFrame[['Lat','Long']]
+locationDf = processedDataFrame[['Lat', 'Long']]
 
 # remove missing values
 locationDf = locationDf.dropna()
 
+specificLocation = locationDf.loc[(locationDf['Lat'] > 40) & (locationDf['Long'] < -60)]
+
+ax = sns.scatterplot(x="Long", y="Lat", data=specificLocation)
+# endregion
+
+# Let's try matplotlib also
+
+# region
+x = specificLocation['Long']
+y = specificLocation['Lat']
+
+colors = np.random.rand(len(specificLocation))
+
+plt.figure(figsize=(12, 12))
+plt.scatter(x, y, c=colors, alpha=0.5)
+plt.show()
 # endregion
