@@ -31,6 +31,10 @@ import calendar
 # visualization
 import seaborn as sns
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# clustering
+from sklearn.cluster import KMeans
 
 # endregion
 
@@ -188,7 +192,31 @@ y = specificLocation['Lat']
 
 colors = np.random.rand(len(specificLocation))
 
-plt.figure(figsize=(12, 12))
+plt.figure(figsize=(8, 8))
 plt.scatter(x, y, c=colors, alpha=0.5)
+plt.xlabel("Long")
+plt.ylabel("Lat")
+plt.show()
+# endregion
+
+# Let's do the clustering
+
+# - 2 clusters
+
+# region
+locationArray = specificLocation.values
+
+# KMeans
+km = KMeans(n_clusters=2)
+km.fit(locationArray)
+y_kmeans = km.predict(locationArray)
+labels = km.labels_
+
+# Plotting
+plt.figure(figsize=(8, 8))
+plt.scatter(locationArray[:,1], locationArray[:,0], c=y_kmeans)
+plt.xlabel("Long")
+plt.ylabel("Lat")
+plt.title("Location clustering with 2 clusters", fontsize=14)
 plt.show()
 # endregion
