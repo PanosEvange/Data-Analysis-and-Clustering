@@ -162,3 +162,15 @@ print("the most common type of crime that is committed during the day is ", most
 print(codeCount[codeCount == codeCount.max()])
 # onlyDayCrimes  # printToBeRemoved
 # endregion
+
+# 5. #### Clustering based on location
+
+# Let's try a scatter plot with seaborn first
+
+# region
+locationDf = processedDataFrame[['Lat','Long']]
+
+# remove missing values
+locationDf = locationDf.dropna()
+
+# endregion
