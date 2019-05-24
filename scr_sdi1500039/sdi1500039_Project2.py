@@ -199,24 +199,39 @@ plt.ylabel("Lat")
 plt.show()
 # endregion
 
-# Let's do the clustering
+# Let's do the location clustering
+
+def KMeansLocationClustering(array, numberOfClusters):
+    title = "Location clustering with " +  str(numberOfClusters) + " clusters"
+
+    # KMeans
+    km = KMeans(n_clusters=numberOfClusters)
+    km.fit(array)
+    y_kmeans = km.predict(array)
+    labels = km.labels_
+
+    # Plotting
+    plt.figure(figsize=(8, 8))
+    plt.scatter(array[:, 1], array[:, 0], c=y_kmeans)
+    plt.xlabel("Long")
+    plt.ylabel("Lat")
+    plt.title(title, fontsize=14)
+    plt.show()
+
+locationArray = specificLocation.values
 
 # - 2 clusters
 
-# region
-locationArray = specificLocation.values
+KMeansLocationClustering(locationArray, 2)
 
-# KMeans
-km = KMeans(n_clusters=2)
-km.fit(locationArray)
-y_kmeans = km.predict(locationArray)
-labels = km.labels_
+# - 3 clusters
 
-# Plotting
-plt.figure(figsize=(8, 8))
-plt.scatter(locationArray[:,1], locationArray[:,0], c=y_kmeans)
-plt.xlabel("Long")
-plt.ylabel("Lat")
-plt.title("Location clustering with 2 clusters", fontsize=14)
-plt.show()
-# endregion
+KMeansLocationClustering(locationArray, 3)
+
+# - 5 clusters
+
+KMeansLocationClustering(locationArray, 5)
+
+# - 10 clusters
+
+KMeansLocationClustering(locationArray, 10)
