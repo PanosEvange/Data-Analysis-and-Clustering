@@ -155,9 +155,11 @@ mostCommonOffenseCode = onlyDayCrimes['OFFENSE_CODE_GROUP'].mode()
 # groupBy by offense_code
 codeCount = onlyDayCrimes.groupby(['OFFENSE_CODE_GROUP'])['INCIDENT_NUMBER'].count()
 
-print("the most common type of crime that is committed during the day is ", mostCommonOffenseCode)
-print(codeCount[codeCount == codeCount.max()])
-# onlyDayCrimes  # printToBeRemoved
+mostCommonOffenseCodeOutput = "The most common type of crime that is committed during the day is \"" +\
+                              str(codeCount[codeCount == codeCount.max()].index[0]) + "\" with " +\
+                              str(codeCount[codeCount == codeCount.max()].values[0]) + " crimes."
+
+print(mostCommonOffenseCodeOutput)
 # endregion
 
 # ### 5. Clustering based on location
