@@ -174,7 +174,10 @@ locationDf = locationDf.dropna()
 
 specificLocation = locationDf.loc[(locationDf['Lat'] > 40) & (locationDf['Long'] < -60)]
 
+plt.figure(figsize=(9, 9))
 ax = sns.scatterplot(x="Long", y="Lat", data=specificLocation)
+ax.set(xlabel='Long', ylabel='Lat')
+plt.show()
 # endregion
 
 # Let's try matplotlib also
@@ -185,8 +188,8 @@ y = specificLocation['Lat']
 
 colors = np.random.rand(len(specificLocation))
 
-plt.figure(figsize=(8, 8))
-plt.scatter(x, y, c=colors, alpha=0.5)
+plt.figure(figsize=(9, 9))
+plt.scatter(x, y, c=colors)
 plt.xlabel("Long")
 plt.ylabel("Lat")
 plt.show()
@@ -195,7 +198,7 @@ plt.show()
 # - #### Let's do the location clustering without extra variables
 
 def KMeansLocationClustering(array, numberOfClusters):
-    title = "Location clustering with " +  str(numberOfClusters) + " clusters"
+    title = "Location clustering with " + str(numberOfClusters) + " clusters"
 
     # KMeans
     km = KMeans(n_clusters=numberOfClusters)
@@ -204,7 +207,7 @@ def KMeansLocationClustering(array, numberOfClusters):
     labels = km.labels_
 
     # Plotting
-    plt.figure(figsize=(8, 8))
+    plt.figure(figsize=(9, 9))
     plt.scatter(array[:, 1], array[:, 0], c=labels.astype(np.float))
     plt.xlabel("Long")
     plt.ylabel("Lat")
