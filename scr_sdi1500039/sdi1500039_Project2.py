@@ -109,16 +109,19 @@ yearShootings = shootingDataFrame.groupby(['YEAR'])['SHOOTING'].sum()
 # groupBy district
 districtShootings = shootingDataFrame.groupby(['DISTRICT'])['SHOOTING'].sum()
 
-print("Shootings by year:")  # printToBeRemoved
-print(yearShootings)  # printToBeRemoved
-print("Max year is:")  # printToBeRemoved
-print(yearShootings[yearShootings == yearShootings.max()])  # printToBeRemoved
-print("--------------")  # printToBeRemoved
-print("Shootings by district:")  # printToBeRemoved
-print(districtShootings)  # printToBeRemoved
-print("Max district is:")  # printToBeRemoved
-print(districtShootings[districtShootings == districtShootings.max()])  # printToBeRemoved
-print("--------------")  # printToBeRemoved
+maxYearSeries = yearShootings[yearShootings == yearShootings.max()]
+maxYearOutput = "The year with the most shootings is the year " + str(maxYearSeries.index[0]) + \
+                " with " + str(maxYearSeries.values[0]) + " shootings."
+
+maxDistrictSeries = districtShootings[districtShootings == districtShootings.max()]
+maxDistrictOutput = "The district with the most shootings is the district " + str(maxDistrictSeries.index[0]) + \
+                " with " + str(maxDistrictSeries.values[0]) + " shootings."
+
+print("----------------------------------------------------------------------------")
+print(maxYearOutput)
+print("----------------------------------------------------------------------------")
+print(maxDistrictOutput)
+print("----------------------------------------------------------------------------")
 # endregion
 
 # ### 3. Check if crimes are more during the day than during the night
