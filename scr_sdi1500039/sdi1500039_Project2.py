@@ -135,13 +135,10 @@ dayNightDataFrame['DAY_NIGHT'] = np.where(((dayNightDataFrame['HOUR'] >= 7) & (d
 dayCrimesCount = (dayNightDataFrame['DAY_NIGHT'] == 'day').sum()
 nightCrimesCount = (dayNightDataFrame['DAY_NIGHT'] == 'night').sum()
 
-print("Count of crimes during day is:")  # printToBeRemoved
-print(dayCrimesCount)  # printToBeRemoved
-
-print("Count of crimes during night is:")  # printToBeRemoved
-print(nightCrimesCount)  # printToBeRemoved
-
-# dayNightDataFrame  # printToBeRemoved
+if dayCrimesCount > nightCrimesCount:
+    print("The number of crimes during the day is more than the number of crimes during the night.")
+else:
+    print("The number of crimes during the night is more than the number of crimes during the day.")
 # endregion
 
 # ### 4. Find the most common type of crime that is committed during the day
