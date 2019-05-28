@@ -117,11 +117,9 @@ maxDistrictSeries = districtShootings[districtShootings == districtShootings.max
 maxDistrictOutput = "The district with the most shootings is the district " + str(maxDistrictSeries.index[0]) + \
                 " with " + str(maxDistrictSeries.values[0]) + " shootings."
 
-print("----------------------------------------------------------------------------")
 print(maxYearOutput)
-print("----------------------------------------------------------------------------")
+print("\n")
 print(maxDistrictOutput)
-print("----------------------------------------------------------------------------")
 # endregion
 
 # ### 3. Check if crimes are more during the day than during the night
@@ -291,3 +289,8 @@ KMeansLocationClustering(locationArrayMonth, 5)
 # - 10 clusters
 
 KMeansLocationClustering(locationArrayMonth, 10)
+
+# **Σχόλια και παρατηρήσεις**
+#   - Παρατηρούμε ότι η νέα μεταβλητή που προσθέτουμε στον kmeans αλλάζει τα σημεία στο χώρο και ο kmeans δεν μπορεί
+#   να βρει τόσο εύκολα τα clusters με τη νέα μεταβλητή που έχει προστεθεί. Αυτός είναι και ο λόγος που βλέπουμε τα
+#   σημεία ανακατεμένα.
