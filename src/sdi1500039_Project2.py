@@ -16,8 +16,8 @@
 # ---
 
 # # <center>Data Mining Project 2 Spring semester 2018-2019</center>
-# ## <center>Παναγιώτης Ευαγγελίου &emsp; 1115201500039</center>
-# ## <center>Ευάγγελος Σπίθας &emsp;&emsp;&emsp;&ensp; 1115201500147</center>
+# ## <center>Παναγιώτης Ευαγγελίου</center>
+# ## <center>Ευάγγελος Σπίθας</center>
 
 # ___
 
