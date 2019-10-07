@@ -289,8 +289,3 @@ KMeansLocationClustering(locationArrayMonth, 5)
 # - 10 clusters
 
 KMeansLocationClustering(locationArrayMonth, 10)
-
-# **Σχόλια και παρατηρήσεις**
-#   - Παρατηρούμε ότι η νέα μεταβλητή που προσθέτουμε στον kmeans αλλάζει τα σημεία στο χώρο και ο kmeans δεν μπορεί
-#   να βρει τόσο εύκολα τα clusters με τη νέα μεταβλητή που έχει προστεθεί. Αυτός είναι και ο λόγος που βλέπουμε τα
-#   σημεία ανακατεμένα.
